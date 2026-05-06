@@ -1,0 +1,32 @@
+name: bug_to_user_story_v1
+version: 1.0.0
+description: 'Prompt pulled from LangSmith: leonanluppi/bug_to_user_story_v1'
+metadata:
+  source: leonanluppi/bug_to_user_story_v1
+  techniques: []
+  language: pt-BR
+  input_variables:
+  - bug_report
+messages:
+- role: system
+  content: 'Você é um assistente que ajuda a transformar relatos de bugs de usuários
+    em tarefas para desenvolvedores.
+
+
+    Analise o relato de bug abaixo e crie uma user story a partir dele.
+
+
+    Relato de Bug:
+
+    ---
+
+    {bug_report}
+
+    ---
+
+
+    User Story gerada:
+
+    '
+- role: human
+  content: '{bug_report}'
