@@ -10,6 +10,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 
 _eval_llm = None
+_cache_stats = {"calls": 0, "input_tokens": 0, "cached_tokens": 0}
 
 
 def _get_eval_llm():
@@ -21,6 +22,19 @@ def _get_eval_llm():
     return _eval_llm
 
 
+def get_cache_stats() -> dict:
+    stats = dict(_cache_stats)
+    stats["cache_hit_rate"] = (
+        stats["cached_tokens"] / stats["input_tokens"]
+        if stats["input_tokens"] > 0 else 0.0
+    )
+    return stats
+
+
+def reset_cache_stats():
+    _cache_stats.update({"calls": 0, "input_tokens": 0, "cached_tokens": 0})
+
+
 def _llm_score(prompt_text: str, system: str) -> float:
     llm = _get_eval_llm()
     prompt = ChatPromptTemplate.from_messages([
@@ -28,8 +42,15 @@ def _llm_score(prompt_text: str, system: str) -> float:
         ("human", prompt_text),
     ])
     response = (prompt | llm).invoke({})
+
+    usage = response.usage_metadata or {}
+    _cache_stats["calls"] += 1
+    _cache_stats["input_tokens"] += usage.get("input_tokens", 0)
+    _cache_stats["cached_tokens"] += (
+        usage.get("input_token_details", {}).get("cache_read", 0)
+    )
+
     text = response.content.strip()
-    # Extract first number found (0-10 scale)
     match = re.search(r'\b([0-9]|10)(\.[0-9]+)?\b', text)
     if match:
         score = float(match.group())

@@ -18,7 +18,7 @@ from langsmith import Client
 from langsmith.evaluation import evaluate
 from langchain_openai import ChatOpenAI
 
-from src.metrics import ALL_EVALUATORS
+from src.metrics import ALL_EVALUATORS, get_cache_stats, reset_cache_stats
 from src.utils import print_results
 
 DATASET_NAME = "bug_to_user_story_dataset"
@@ -78,6 +78,7 @@ def run_prompt(inputs: dict) -> dict:
 
 def main():
     print("Executando avaliação dos prompts...")
+    reset_cache_stats()
 
     ensure_dataset_exists()
 
@@ -106,6 +107,16 @@ def main():
             ordered[key] = metrics[key]
 
     print_results(PROMPT_NAME, ordered)
+
+    cache = get_cache_stats()
+    print("Cache Stats (OpenAI automatic prefix caching):")
+    print(f"  Evaluator calls : {cache['calls']}")
+    print(f"  Input tokens    : {cache['input_tokens']:,}")
+    print(f"  Cached tokens   : {cache['cached_tokens']:,}")
+    print(f"  Cache hit rate  : {cache['cache_hit_rate']:.1%}")
+    if cache["cached_tokens"] == 0:
+        print("  ℹ️  No cache hits detected. Prompts may be below the 1024-token threshold")
+        print("     or the cache window expired between runs.")
 
 
 if __name__ == "__main__":
