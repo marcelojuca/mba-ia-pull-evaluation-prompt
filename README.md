@@ -48,25 +48,29 @@ Antes de escrever a User Story, analise mentalmente:
 | Métrica      | v1 (Baixa Qualidade) | v2 (Otimizado) | Resultado |
 |-------------|----------------------|-----------------|-----------|
 | Helpfulness | ~0.45               | **0.92**        | ✅ +104%  |
-| Correctness | ~0.52               | **0.99**        | ✅ +90%   |
+| Correctness | ~0.52               | **1.00**        | ✅ +92%   |
 | F1-Score    | ~0.48               | **1.00**        | ✅ +108%  |
-| Clarity     | ~0.50               | **0.90**        | ✅ +80%   |
-| Precision   | ~0.46               | **0.92**        | ✅ +100%  |
+| Clarity     | ~0.50               | **0.91**        | ✅ +82%   |
+| Precision   | ~0.46               | **0.93**        | ✅ +102%  |
 | **STATUS**  | ❌ REPROVADO         | ✅ **APROVADO** |           |
+
+### Dashboard LangSmith
+
+![LangSmith Experiment Results](docs/langsmith-results.png)
 
 ### Experimento LangSmith
 
 - **Prompt público:** [marcelojuca/bug_to_user_story_v2](https://smith.langchain.com/hub/marcelojuca/bug_to_user_story_v2)
 - **Dataset:** [bug_to_user_story_dataset](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/datasets/7552e10e-5b22-436f-9d37-7f371fd84a73) — 15 exemplos (5 simples, 7 médios, 3 complexos)
-- **Experimento:** [bug_to_user_story_v2_eval-3a50013c](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/datasets/7552e10e-5b22-436f-9d37-7f371fd84a73/compare?selectedSessions=4c460e6b-c2de-4fb0-9abc-c9d74bf3d571) — todas as métricas ≥ 0.9
+- **Experimento:** [marcelojuca/bug_to_user_story_v2_eval-a985f1c6](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/datasets/7552e10e-5b22-436f-9d37-7f371fd84a73/compare?selectedSessions=556f7858-bb31-4ebb-b3ad-7e757d46944f) — todas as métricas ≥ 0.9
 
 ### Tracing — 3 Exemplos Detalhados
 
 | # | Bug Report | Trace |
 |---|-----------|-------|
-| 1 | Usuários com papel 'Editor' conseguem deletar outros usuários (autorização) | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/4c460e6b-c2de-4fb0-9abc-c9d74bf3d571/r/c7f13d6c-df9f-4e98-b288-4d7bc1f38bde) |
-| 2 | Cache servindo dados desatualizados — conflitos em operações colaborativas | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/4c460e6b-c2de-4fb0-9abc-c9d74bf3d571/r/5037abd8-af8c-461b-81ce-50912665e6a9) |
-| 3 | Campo de pesquisa não funciona no Safari (cross-browser bug) | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/4c460e6b-c2de-4fb0-9abc-c9d74bf3d571/r/f1ee42cf-ac2f-434f-8975-0d32ad9a9af5) |
+| 1 | Usuários com papel 'Editor' conseguem deletar outros usuários (autorização) | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/556f7858-bb31-4ebb-b3ad-7e757d46944f/r/e6fd844b-826c-46a8-a943-d0b2f808e0c9) |
+| 2 | Cache servindo dados desatualizados — conflitos em operações colaborativas | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/556f7858-bb31-4ebb-b3ad-7e757d46944f/r/6350cfb1-eb5d-45a4-93a0-800119b481cd) |
+| 3 | Campo de pesquisa não funciona no Safari (cross-browser bug) | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/556f7858-bb31-4ebb-b3ad-7e757d46944f/r/bdaac3d9-198b-4486-9cb3-c0ee030fc66d) |
 
 ## Como Executar
 
