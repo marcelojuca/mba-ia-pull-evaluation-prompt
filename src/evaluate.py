@@ -18,7 +18,7 @@ from langsmith import Client
 from langsmith.evaluation import evaluate
 from langchain_openai import ChatOpenAI
 
-from src.metrics import ALL_EVALUATORS, get_cache_stats, reset_cache_stats
+from src.metrics import ALL_EVALUATORS, get_cache_stats, reset_cache_stats, record_usage
 from src.utils import print_results
 
 DATASET_NAME = "bug_to_user_story_dataset"
@@ -73,6 +73,11 @@ def ensure_dataset_exists():
 def run_prompt(inputs: dict) -> dict:
     chain = _get_chain()
     result = chain.invoke(inputs)
+    usage = result.usage_metadata or {}
+    record_usage(
+        input_tokens=usage.get("input_tokens", 0),
+        cached_tokens=usage.get("input_token_details", {}).get("cache_read", 0),
+    )
     return {"output": result.content}
 
 
@@ -110,7 +115,7 @@ def main():
 
     cache = get_cache_stats()
     print("Cache Stats (OpenAI automatic prefix caching):")
-    print(f"  Evaluator calls : {cache['calls']}")
+    print(f"  Total LLM calls : {cache['calls']} (15 generation + 90 evaluation)")
     print(f"  Input tokens    : {cache['input_tokens']:,}")
     print(f"  Cached tokens   : {cache['cached_tokens']:,}")
     print(f"  Cache hit rate  : {cache['cache_hit_rate']:.1%}")

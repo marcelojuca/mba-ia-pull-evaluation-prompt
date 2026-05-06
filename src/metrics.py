@@ -22,6 +22,13 @@ def _get_eval_llm():
     return _eval_llm
 
 
+def record_usage(input_tokens: int, cached_tokens: int):
+    """Record token usage from any LLM call (not just _llm_score)."""
+    _cache_stats["calls"] += 1
+    _cache_stats["input_tokens"] += input_tokens
+    _cache_stats["cached_tokens"] += cached_tokens
+
+
 def get_cache_stats() -> dict:
     stats = dict(_cache_stats)
     stats["cache_hit_rate"] = (
