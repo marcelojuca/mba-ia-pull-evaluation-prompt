@@ -56,9 +56,17 @@ Antes de escrever a User Story, analise mentalmente:
 
 ### Experimento LangSmith
 
-- **Dataset:** `bug_to_user_story_dataset` (15 exemplos: 5 simples, 7 médios, 3 complexos)
-- **Experiment:** `bug_to_user_story_v2_eval`
-- **Prompt publicado:** `bug_to_user_story_v2` no LangSmith Prompt Hub
+- **Prompt público:** [marcelojuca/bug_to_user_story_v2](https://smith.langchain.com/hub/marcelojuca/bug_to_user_story_v2)
+- **Dataset:** [bug_to_user_story_dataset](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/datasets/7552e10e-5b22-436f-9d37-7f371fd84a73) — 15 exemplos (5 simples, 7 médios, 3 complexos)
+- **Experimento:** [bug_to_user_story_v2_eval-3a50013c](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/datasets/7552e10e-5b22-436f-9d37-7f371fd84a73/compare?selectedSessions=4c460e6b-c2de-4fb0-9abc-c9d74bf3d571) — todas as métricas ≥ 0.9
+
+### Tracing — 3 Exemplos Detalhados
+
+| # | Bug Report | Trace |
+|---|-----------|-------|
+| 1 | Usuários com papel 'Editor' conseguem deletar outros usuários (autorização) | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/4c460e6b-c2de-4fb0-9abc-c9d74bf3d571/r/c7f13d6c-df9f-4e98-b288-4d7bc1f38bde) |
+| 2 | Cache servindo dados desatualizados — conflitos em operações colaborativas | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/4c460e6b-c2de-4fb0-9abc-c9d74bf3d571/r/5037abd8-af8c-461b-81ce-50912665e6a9) |
+| 3 | Campo de pesquisa não funciona no Safari (cross-browser bug) | [Ver trace](https://smith.langchain.com/o/991416a7-555d-40ae-a390-76a998ca0e78/projects/p/4c460e6b-c2de-4fb0-9abc-c9d74bf3d571/r/f1ee42cf-ac2f-434f-8975-0d32ad9a9af5) |
 
 ## Como Executar
 
